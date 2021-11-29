@@ -1,0 +1,50 @@
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form1.resources
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.cache
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\01\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.AssemblyReference.cache
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.AssemblyReference.cache
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form1.resources
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.cache
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\03\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.AssemblyReference.cache
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form1.resources
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.cache
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\03\to send\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.AssemblyReference.cache
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form1.resources
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.cache
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\06\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe.config
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\bin\Debug\WindowsFormsApp3.pdb
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.AssemblyReference.cache
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Form1.resources
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.Properties.Resources.resources
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.GenerateResource.cache
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.csproj.CoreCompileInputs.cache
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.exe
+C:\_Ivan\_Develop\New folder\07\Meshkov_test_v0.2\WindowsFormsApp3\WindowsFormsApp3\obj\Debug\WindowsFormsApp3.pdb
