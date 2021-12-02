@@ -22,10 +22,26 @@ namespace EasyShapes
         Graphics g;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-
+            drawShape(shapes);
         }
 
+        private void drawShape(List<Shape> shapes)
+        {
+            g = CreateGraphics();
 
+            foreach (var shape in shapes)
+            {
+                if (shape.Side != 0)
+                {
+                    g.DrawRectangle(Pens.Blue, shape.X, shape.Y, shape.Side, shape.Side);
+                }
+                else if (shape.Radius != 0)
+                {
+                    g.DrawEllipse(Pens.Blue, shape.X, shape.Y, shape.Radius * 2, shape.Radius * 2);
+                }
+
+            }
+        }
 
         abstract class Shape
         {
@@ -81,7 +97,7 @@ namespace EasyShapes
 
         }
 
-        
+
         class Circle : Shape
         {
             public Circle(int mouseX, int mouseY, int iRadius)
@@ -126,22 +142,20 @@ namespace EasyShapes
 
 
         List<Shape> shapes = new List<Shape>();
-              
+
         int orderNumShape;
-        
+
         byte radioButtonShape; // 0 means Square and 1 means Circle (may be improved with enum?)
 
-        int squareSide = 40;    // ensure it may be devided by 2 - or improve the code to make a check for this
-        int circleRadius = 25;
-        
-        int enlargeOrDecreaseSideStep = 11;
-        int enlargeOrDecreaseRadiusStep = 7;
-        int enlargeLimit = 100;
+        readonly int squareSide = 40;    // ensure it may be devided by 2 - or improve the code to make a check for this
+        readonly int circleRadius = 25;
+
+        readonly int enlargeOrDecreaseSideStep = 11;
+        readonly int enlargeOrDecreaseRadiusStep = 7;
+        readonly int enlargeLimit = 100;
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            g = CreateGraphics();       
-
             //creating both shapes here to use them in the intersection check algorythms (which need improvement - bugs with circle intersection)
             Shape squareNew = new Square(e.X - squareSide / 2, e.Y - squareSide / 2, squareSide);
             Shape circleNew = new Circle(e.X - circleRadius, e.Y - circleRadius, circleRadius);
@@ -155,23 +169,22 @@ namespace EasyShapes
                 }
                 else
                 {
-                    g.DrawRectangle(Pens.Blue, squareNew.X, squareNew.Y, squareNew.Side, squareNew.Side);
                     shapes.Add(squareNew);
+                    drawShape(shapes);
                 }
             }
-            
+
             if (e.Button == MouseButtons.Left && radioButtonShape == 1)
             {
-                if (squareNew.checkIntersect(shapes) ||
-                    circleNew.checkIntersect(shapes) ||
+                if (squareNew.checkIntersect(shapes) || circleNew.checkIntersect(shapes) ||
                     (e.X < circleRadius) || (e.X > this.Width - circleRadius - 20) || (e.Y < circleRadius) || (e.Y > this.Height - circleRadius - 40))
                 {
                     MessageBox.Show("Error: intersection detected.");
                 }
                 else
                 {
-                    g.DrawEllipse(Pens.Blue, circleNew.X, circleNew.Y, circleNew.Radius * 2, circleNew.Radius * 2);
                     shapes.Add(circleNew);
+                    drawShape(shapes);
                 }
             }
 
@@ -199,12 +212,12 @@ namespace EasyShapes
 
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {            
+        {
             radioButtonShape = 0; // 0 means Square (may be improved with enum?)
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {            
+        {
             radioButtonShape = 1; // 1 means Circle (may be improved with enum?)
         }
 
@@ -235,20 +248,9 @@ namespace EasyShapes
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (shapes[orderNumShape].Side != 0)
-            {
-                g.DrawRectangle(Pens.LightGray, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side, shapes[orderNumShape].Side);
-
-                shapes.Remove(shapes[orderNumShape]);
-            }
-
-            else if (shapes[orderNumShape].Radius != 0)
-            {
-                g.DrawEllipse(Pens.LightGray, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Radius * 2, shapes[orderNumShape].Radius * 2);
-
-                shapes.Remove(shapes[orderNumShape]);
-            }
-
+            shapes.Remove(shapes[orderNumShape]);
+            Refresh();
+            drawShape(shapes);
         }
 
         private void enlargeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -257,42 +259,32 @@ namespace EasyShapes
 
             if (shapes[orderNumShape].Side != 0)
             {
-                g.DrawRectangle(Pens.LightGray, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side, shapes[orderNumShape].Side);
-
                 shapes[orderNumShape] = new Square(shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side + enlargeOrDecreaseSideStep);
-
-                g.DrawRectangle(Pens.Blue, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side, shapes[orderNumShape].Side);
             }
 
             else if (shapes[orderNumShape].Radius != 0)
             {
-                g.DrawEllipse(Pens.LightGray, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Radius * 2, shapes[orderNumShape].Radius * 2);
-
                 shapes[orderNumShape] = new Circle(shapes[orderNumShape].X - enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Y - enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Radius + enlargeOrDecreaseRadiusStep);
-
-                g.DrawEllipse(Pens.Blue, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Radius * 2, shapes[orderNumShape].Radius * 2);
             }
+
+            Refresh();
+            drawShape(shapes);
         }
 
         private void decreaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (shapes[orderNumShape].Side != 0)
             {
-                g.DrawRectangle(Pens.LightGray, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side, shapes[orderNumShape].Side);
-
                 shapes[orderNumShape] = new Square(shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side - enlargeOrDecreaseSideStep);
-
-                g.DrawRectangle(Pens.Blue, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side, shapes[orderNumShape].Side);
             }
 
             else if (shapes[orderNumShape].Radius != 0)
             {
-                g.DrawEllipse(Pens.LightGray, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Radius * 2, shapes[orderNumShape].Radius * 2);
-
                 shapes[orderNumShape] = new Circle(shapes[orderNumShape].X + enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Y + enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Radius - enlargeOrDecreaseRadiusStep);
-
-                g.DrawEllipse(Pens.Blue, shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Radius * 2, shapes[orderNumShape].Radius * 2);
             }
+
+            Refresh();
+            drawShape(shapes);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -310,7 +302,7 @@ namespace EasyShapes
                 {
                     resultShapes.Add("0:" + shape.X + ":" + shape.Y + ":" + shape.Side);
                 }
-                
+
             }
 
             //add possibility to browse for the file to load or at least get user input
@@ -327,7 +319,7 @@ namespace EasyShapes
             var savedShapesArray = savedShapes.Split('|');
 
             shapes.Clear();
-            this.Refresh();
+            Refresh();
 
             foreach (var shape in savedShapesArray)
             {
@@ -352,18 +344,7 @@ namespace EasyShapes
 
             }
 
-            foreach (var shape in shapes)
-            {
-                if (shape.Side != 0)
-                {
-                    g.DrawRectangle(Pens.Blue, shape.X, shape.Y, shape.Side, shape.Side);
-                }
-                else if (shape.Radius !=0)
-                {
-                    g.DrawEllipse(Pens.Blue, shape.X, shape.Y, shape.Radius * 2, shape.Radius * 2);
-                }
-                
-            }
+            drawShape(shapes);
         }
     }
 
