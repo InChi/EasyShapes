@@ -1,5 +1,5 @@
 ﻿
-namespace WindowsFormsApp3
+namespace EasyShapes
 {
     partial class Form1
     {
@@ -49,10 +49,10 @@ namespace WindowsFormsApp3
             this.radioButton1.Checked = true;
             this.radioButton1.Location = new System.Drawing.Point(0, 0);
             this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(74, 17);
+            this.radioButton1.Size = new System.Drawing.Size(59, 17);
             this.radioButton1.TabIndex = 1;
             this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Rectangle";
+            this.radioButton1.Text = "Square";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
