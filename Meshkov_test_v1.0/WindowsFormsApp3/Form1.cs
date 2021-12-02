@@ -22,24 +22,16 @@ namespace EasyShapes
         Graphics g;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            drawShape(shapes);
+            drawAllShapes(shapes);
         }
 
-        private void drawShape(List<Shape> shapes)
+        private void drawAllShapes(List<Shape> shapes)
         {
             g = CreateGraphics();
 
             foreach (var shape in shapes)
             {
-                if (shape.Side != 0)
-                {
-                    g.DrawRectangle(Pens.Blue, shape.X, shape.Y, shape.Side, shape.Side);
-                }
-                else if (shape.Radius != 0)
-                {
-                    g.DrawEllipse(Pens.Blue, shape.X, shape.Y, shape.Radius * 2, shape.Radius * 2);
-                }
-
+                shape.Draw(g);
             }
         }
 
@@ -50,7 +42,7 @@ namespace EasyShapes
             public int X { get; set; }
             public int Y { get; set; }
 
-            public abstract void Draw();
+            public abstract void Draw(Graphics g);
             public abstract bool checkIntersect(List<Shape> shapes);
             public abstract int checkHitShape(int mouseX, int mouseY, List<Shape> shapes);
         }
@@ -64,9 +56,9 @@ namespace EasyShapes
                 Side = iSide;
             }
 
-            public override void Draw()
+            public override void Draw(Graphics g)
             {
-                //g.DrawRectangle(Pens.Blue, this.X, this.Y, this.Side, this.Side);
+                g.DrawRectangle(Pens.Blue, this.X, this.Y, this.Side, this.Side);
             }
 
             public override bool checkIntersect(List<Shape> shapes)
@@ -107,9 +99,9 @@ namespace EasyShapes
                 Radius = iRadius;
             }
 
-            public override void Draw()
+            public override void Draw(Graphics g)
             {
-                //g.DrawEllipse(Pens.Blue, this.X, this.Y, this.Radius * 2, this.Radius * 2);
+                g.DrawEllipse(Pens.Blue, this.X, this.Y, this.Radius * 2, this.Radius * 2);
             }
 
             // there are bugs with circle intersection check
@@ -169,8 +161,8 @@ namespace EasyShapes
                 }
                 else
                 {
+                    squareNew.Draw(g);
                     shapes.Add(squareNew);
-                    drawShape(shapes);
                 }
             }
 
@@ -183,8 +175,8 @@ namespace EasyShapes
                 }
                 else
                 {
+                    circleNew.Draw(g);
                     shapes.Add(circleNew);
-                    drawShape(shapes);
                 }
             }
 
@@ -250,7 +242,7 @@ namespace EasyShapes
         {
             shapes.Remove(shapes[orderNumShape]);
             Refresh();
-            drawShape(shapes);
+            drawAllShapes(shapes);
         }
 
         private void enlargeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -268,7 +260,7 @@ namespace EasyShapes
             }
 
             Refresh();
-            drawShape(shapes);
+            drawAllShapes(shapes);
         }
 
         private void decreaseToolStripMenuItem_Click(object sender, EventArgs e)
@@ -284,7 +276,7 @@ namespace EasyShapes
             }
 
             Refresh();
-            drawShape(shapes);
+            drawAllShapes(shapes);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -344,7 +336,7 @@ namespace EasyShapes
 
             }
 
-            drawShape(shapes);
+            drawAllShapes(shapes);
         }
     }
 
