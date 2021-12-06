@@ -14,12 +14,30 @@ namespace EasyShapes
 {
     public partial class Form1 : Form
     {
+        readonly int SquareSide = 40;    // ensure it may be devided by 2 - or improve the code to make a check for this
+        readonly int CircleRadius = 25;
+
+        readonly int EnlargeDecrSideStep = 11;
+        readonly int EnlargeDecrRadiusStep = 7;
+        readonly int EnlargeLimit = 100;
+
+        List<Shape> shapes = new List<Shape>();
+        int orderNumShape;
+
+        enum ShapeChosen
+        {
+            Square,
+            Circle
+        }
+
+        byte radioButtonShape;
+
+        Graphics g;
+
         public Form1()
         {
             InitializeComponent();
         }
-
-        Graphics g;
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             drawAllShapes(shapes);
@@ -35,127 +53,16 @@ namespace EasyShapes
             }
         }
 
-        abstract class Shape
-        {
-            public int Side { get; set; }
-            public int Radius { get; set; }
-            public int X { get; set; }
-            public int Y { get; set; }
-
-            public abstract void Draw(Graphics g);
-            public abstract bool checkIntersect(List<Shape> shapes);
-            public abstract int checkHitShape(int mouseX, int mouseY, List<Shape> shapes);
-        }
-
-        class Square : Shape
-        {
-            public Square(int mouseX, int mouseY, int iSide)
-            {
-                X = mouseX;
-                Y = mouseY;
-                Side = iSide;
-            }
-
-            public override void Draw(Graphics g)
-            {
-                g.DrawRectangle(Pens.Blue, this.X, this.Y, this.Side, this.Side);
-            }
-
-            public override bool checkIntersect(List<Shape> shapes)
-            {
-                foreach (var checkSquare in shapes)
-                {
-                    if (((checkSquare.X + checkSquare.Side) >= X && checkSquare.X <= (X + Side)) &&
-                        ((checkSquare.Y + checkSquare.Side) >= Y && checkSquare.Y <= (Y + Side)))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            public override int checkHitShape(int mouseX, int mouseY, List<Shape> shapes)
-            {
-                for (int i = 0; i < shapes.Count; i++)
-                {
-                    if (mouseX > shapes[i].X && mouseX < (shapes[i].X + shapes[i].Side)
-                        && mouseY > shapes[i].Y && mouseY < (shapes[i].Y + shapes[i].Side))
-                    {
-                        return i;
-                    }
-                }
-                return -1;
-            }
-
-        }
-
-
-        class Circle : Shape
-        {
-            public Circle(int mouseX, int mouseY, int iRadius)
-            {
-                X = mouseX;
-                Y = mouseY;
-                Radius = iRadius;
-            }
-
-            public override void Draw(Graphics g)
-            {
-                g.DrawEllipse(Pens.Blue, this.X, this.Y, this.Radius * 2, this.Radius * 2);
-            }
-
-            // there are bugs with circle intersection check
-            public override bool checkIntersect(List<Shape> shapes)
-            {
-                foreach (var circle in shapes)
-                {
-                    var distance = Math.Sqrt((Math.Pow(X - circle.X, 2) + Math.Pow(Y - circle.Y, 2)));
-                    if (distance < (Radius + circle.Radius))
-                    {
-                        return true;
-                    }
-                }
-                return false;
-            }
-
-            public override int checkHitShape(int mouseX, int mouseY, List<Shape> shapes)
-            {
-                for (int i = 0; i < shapes.Count; i++)
-                {
-                    var distance = Math.Sqrt((Math.Pow(mouseX - shapes[i].Radius - shapes[i].X, 2) + Math.Pow(mouseY - shapes[i].Radius - shapes[i].Y, 2)));
-                    if (distance < shapes[i].Radius)
-                    {
-                        return i;
-                    }
-                }
-                return -1;
-            }
-        }
-
-
-        List<Shape> shapes = new List<Shape>();
-
-        int orderNumShape;
-
-        byte radioButtonShape; // 0 means Square and 1 means Circle (may be improved with enum?)
-
-        readonly int squareSide = 40;    // ensure it may be devided by 2 - or improve the code to make a check for this
-        readonly int circleRadius = 25;
-
-        readonly int enlargeOrDecreaseSideStep = 11;
-        readonly int enlargeOrDecreaseRadiusStep = 7;
-        readonly int enlargeLimit = 100;
-
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
             //creating both shapes here to use them in the intersection check algorythms (which need improvement - bugs with circle intersection)
-            Shape squareNew = new Square(e.X - squareSide / 2, e.Y - squareSide / 2, squareSide);
-            Shape circleNew = new Circle(e.X - circleRadius, e.Y - circleRadius, circleRadius);
+            Shape squareNew = new Square(e.X - SquareSide / 2, e.Y - SquareSide / 2, SquareSide);
+            Shape circleNew = new Circle(e.X - CircleRadius, e.Y - CircleRadius, CircleRadius);
 
             if (e.Button == MouseButtons.Left && radioButtonShape == 0)
             {
                 if (squareNew.checkIntersect(shapes) || circleNew.checkIntersect(shapes) ||
-                    (e.X < squareSide / 2) || (e.X > this.Width - squareSide) || (e.Y < squareSide / 2) || (e.Y > this.Height - squareSide - 20))
+                    (e.X < SquareSide / 2) || (e.X > this.Width - SquareSide) || (e.Y < SquareSide / 2) || (e.Y > this.Height - SquareSide - 20))
                 {
                     MessageBox.Show("Error: intersection detected.");
                 }
@@ -169,7 +76,7 @@ namespace EasyShapes
             if (e.Button == MouseButtons.Left && radioButtonShape == 1)
             {
                 if (squareNew.checkIntersect(shapes) || circleNew.checkIntersect(shapes) ||
-                    (e.X < circleRadius) || (e.X > this.Width - circleRadius - 20) || (e.Y < circleRadius) || (e.Y > this.Height - circleRadius - 40))
+                    (e.X < CircleRadius) || (e.X > this.Width - CircleRadius - 20) || (e.Y < CircleRadius) || (e.Y > this.Height - CircleRadius - 40))
                 {
                     MessageBox.Show("Error: intersection detected.");
                 }
@@ -205,19 +112,20 @@ namespace EasyShapes
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            radioButtonShape = 0; // 0 means Square (may be improved with enum?)
+            radioButtonShape = (byte)ShapeChosen.Square;
+
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            radioButtonShape = 1; // 1 means Circle (may be improved with enum?)
+            radioButtonShape = (byte)ShapeChosen.Circle;
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             // check to ensure that shape does not exceed enlargeLimit
-            if ((shapes[orderNumShape].Side > enlargeLimit - enlargeOrDecreaseSideStep)
-                || (shapes[orderNumShape].Radius * 2 > enlargeLimit - enlargeOrDecreaseRadiusStep * 2))
+            if ((shapes[orderNumShape].Side > EnlargeLimit - EnlargeDecrSideStep)
+                || (shapes[orderNumShape].Radius * 2 > EnlargeLimit - EnlargeDecrRadiusStep * 2))
             {
                 enlargeToolStripMenuItem.Enabled = false;
             }
@@ -227,8 +135,8 @@ namespace EasyShapes
             }
 
             // check to ensure that shape can not be decreased into non-existence
-            if (shapes[orderNumShape].Side != 0 && shapes[orderNumShape].Side <= enlargeOrDecreaseSideStep
-                || (shapes[orderNumShape].Radius != 0 && shapes[orderNumShape].Radius <= enlargeOrDecreaseRadiusStep))
+            if (shapes[orderNumShape].Side != 0 && shapes[orderNumShape].Side <= EnlargeDecrSideStep
+                || (shapes[orderNumShape].Radius != 0 && shapes[orderNumShape].Radius <= EnlargeDecrRadiusStep))
             {
                 decreaseToolStripMenuItem.Enabled = false;
             }
@@ -251,12 +159,12 @@ namespace EasyShapes
 
             if (shapes[orderNumShape].Side != 0)
             {
-                shapes[orderNumShape] = new Square(shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side + enlargeOrDecreaseSideStep);
+                shapes[orderNumShape] = new Square(shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side + EnlargeDecrSideStep);
             }
 
             else if (shapes[orderNumShape].Radius != 0)
             {
-                shapes[orderNumShape] = new Circle(shapes[orderNumShape].X - enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Y - enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Radius + enlargeOrDecreaseRadiusStep);
+                shapes[orderNumShape] = new Circle(shapes[orderNumShape].X - EnlargeDecrRadiusStep, shapes[orderNumShape].Y - EnlargeDecrRadiusStep, shapes[orderNumShape].Radius + EnlargeDecrRadiusStep);
             }
 
             Refresh();
@@ -267,12 +175,12 @@ namespace EasyShapes
         {
             if (shapes[orderNumShape].Side != 0)
             {
-                shapes[orderNumShape] = new Square(shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side - enlargeOrDecreaseSideStep);
+                shapes[orderNumShape] = new Square(shapes[orderNumShape].X, shapes[orderNumShape].Y, shapes[orderNumShape].Side - EnlargeDecrSideStep);
             }
 
             else if (shapes[orderNumShape].Radius != 0)
             {
-                shapes[orderNumShape] = new Circle(shapes[orderNumShape].X + enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Y + enlargeOrDecreaseRadiusStep, shapes[orderNumShape].Radius - enlargeOrDecreaseRadiusStep);
+                shapes[orderNumShape] = new Circle(shapes[orderNumShape].X + EnlargeDecrRadiusStep, shapes[orderNumShape].Y + EnlargeDecrRadiusStep, shapes[orderNumShape].Radius - EnlargeDecrRadiusStep);
             }
 
             Refresh();
